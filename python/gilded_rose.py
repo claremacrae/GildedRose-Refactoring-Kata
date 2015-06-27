@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-def adjust_quality_if_less_than_50(item):
+def increment_quality_if_less_than_50(item):
     if item.quality < 50:
         item.quality = item.quality + 1
 
@@ -9,15 +9,15 @@ def handle_sulfuras(item):
     pass
 
 def handle_aged_brie(item):
-    adjust_quality_if_less_than_50(item)
+    increment_quality_if_less_than_50(item)
     item.sell_in = item.sell_in - 1
 
 def handle_backstage_pass(item):
-    adjust_quality_if_less_than_50( item)
+    increment_quality_if_less_than_50( item)
     if item.sell_in < 11:
-        adjust_quality_if_less_than_50(item)
+        increment_quality_if_less_than_50(item)
     if item.sell_in < 6:
-        adjust_quality_if_less_than_50(item)
+        increment_quality_if_less_than_50(item)
 
     item.sell_in = item.sell_in - 1
 
