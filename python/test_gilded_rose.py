@@ -34,7 +34,15 @@ class GildedRoseTest(unittest.TestCase):
 
     # TODO Once the sell by date has passed, Quality degrades twice as fast
 
-    # TODO The Quality of an item is never negative
+    # The Quality of an item is never negative
+    def test_quality_never_negative(self):
+        self.check_one_item(
+            Item(name="Elixir of the Mongoose", sell_in=5, quality=1),
+            ["Elixir of the Mongoose", 4, 0])
+
+        self.check_one_item(
+            Item(name="Elixir of the Mongoose", sell_in=5, quality=0),
+            ["Elixir of the Mongoose", 4, 0])
 
     # "Aged Brie" actually increases in Quality the older it gets
     def test_aged_brie_quality_increases_with_age(self):
