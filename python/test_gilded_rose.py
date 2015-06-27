@@ -55,7 +55,15 @@ class GildedRoseTest(unittest.TestCase):
             ["Aged Brie", 1, 1])
         pass
 
-    # TODO The Quality of an item is never more than 50
+    # The Quality of an item is never more than 50
+    def test_aged_brie_quality_does_not_increase_above_50(self):
+        self.check_one_item(
+            Item(name="Aged Brie", sell_in=30, quality=49),
+            ["Aged Brie", 29, 50])
+
+        self.check_one_item(
+            Item(name="Aged Brie", sell_in=30, quality=50),
+            ["Aged Brie", 29, 50])
 
     # "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
     # "Sulfuras" is a legendary item and as such its Quality is 80 and it never alters.
