@@ -32,7 +32,11 @@ class GildedRoseTest(unittest.TestCase):
             Item(name="Elixir of the Mongoose", sell_in=5, quality=7),
             ["Elixir of the Mongoose", 4, 6])
 
-    # TODO Once the sell by date has passed, Quality degrades twice as fast
+    # Once the sell by date has passed, Quality degrades twice as fast
+    def test_quality_drops_twice_as_fast_after_sell_by(self):
+        self.check_one_item(
+            Item(name="Elixir of the Mongoose", sell_in=0, quality=7),
+            ["Elixir of the Mongoose", -1, 5])
 
     # The Quality of an item is never negative
     def test_quality_never_negative(self):
