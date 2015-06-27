@@ -75,7 +75,11 @@ class GildedRoseTest(unittest.TestCase):
             Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=5, quality=49),
             ["Backstage passes to a TAFKAL80ETC concert", 4, 50]) # TODO should increase by 2
 
-    # TODO but Quality drops to 0 after the concert
+    # "Backstage pass" Quality drops to 0 after the concert
+    def test_backstage_passes_increase_by_five_when_ten_days_or_less(self):
+        self.check_one_item(
+            Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=0, quality=49),
+            ["Backstage passes to a TAFKAL80ETC concert", -1, 0])
 
     # Conjured items initially behave normally
     def test_conjured_items_degrade_normally(self):
