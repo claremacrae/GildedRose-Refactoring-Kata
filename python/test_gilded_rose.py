@@ -55,7 +55,7 @@ class GildedRoseTest(unittest.TestCase):
             ["Aged Brie", 1, 1])
         pass
 
-    # The Quality of an item is never more than 50
+    # The Quality of an item is never more than 50 - Aged Brie
     def test_aged_brie_quality_does_not_increase_above_50(self):
         self.check_one_item(
             Item(name="Aged Brie", sell_in=30, quality=49),
@@ -84,17 +84,47 @@ class GildedRoseTest(unittest.TestCase):
             Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=20),
             ["Backstage passes to a TAFKAL80ETC concert", 14, 21])
 
+    # The Quality of an item is never more than 50 - Backstage passes
+    def test_backstage_pass_quality_does_not_increase_above_50_when_more_than_ten_days(self):
+        self.check_one_item(
+            Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=49),
+            ["Backstage passes to a TAFKAL80ETC concert", 14, 50])
+
+        self.check_one_item(
+            Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=50),
+            ["Backstage passes to a TAFKAL80ETC concert", 14, 50])
+
     # Quality increases by 2 when there are 10 days or less
     def test_backstage_passes_increase_by_two_when_ten_days_or_less(self):
         self.check_one_item(
             Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=10, quality=49),
             ["Backstage passes to a TAFKAL80ETC concert", 9, 50]) # TODO should increase by 2
 
+    # The Quality of an item is never more than 50 - Backstage passes
+    def test_backstage_pass_quality_does_not_increase_above_50_when_ten_days_or_less(self):
+        self.check_one_item(
+            Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=10, quality=49),
+            ["Backstage passes to a TAFKAL80ETC concert", 9, 50])
+
+        self.check_one_item(
+            Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=10, quality=50),
+            ["Backstage passes to a TAFKAL80ETC concert", 9, 50])
+
     # and by 3 when there are 5 days or less
-    def test_backstage_passes_increase_by_five_when_ten_days_or_less(self):
+    def test_backstage_passes_increase_by_five_when_five_days_or_less(self):
         self.check_one_item(
             Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=5, quality=49),
             ["Backstage passes to a TAFKAL80ETC concert", 4, 50]) # TODO should increase by 2
+
+    # The Quality of an item is never more than 50 - Backstage passes
+    def test_backstage_pass_quality_does_not_increase_above_50_when_more_five_days_or_less(self):
+        self.check_one_item(
+            Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=5, quality=49),
+            ["Backstage passes to a TAFKAL80ETC concert", 4, 50])
+
+        self.check_one_item(
+            Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=5, quality=50),
+            ["Backstage passes to a TAFKAL80ETC concert", 4, 50])
 
     # "Backstage pass" Quality drops to 0 after the concert
     def test_backstage_passes_increase_by_five_when_ten_days_or_less(self):
