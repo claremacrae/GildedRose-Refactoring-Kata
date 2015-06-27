@@ -4,6 +4,10 @@ def adjust_quality_if_less_than_50(item):
     if item.quality < 50:
         item.quality = item.quality + 1
 
+def handle_sulfuras(item):
+    # never changes
+    pass
+
 class GildedRose(object):
 
     def __init__(self, items):
@@ -11,10 +15,13 @@ class GildedRose(object):
 
     def update_quality(self):
         for item in self.items:
+            if item.name == "Sulfuras, Hand of Ragnaros":
+                handle_sulfuras(item)
+                continue
+
             if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert":
                 if item.quality > 0:
-                    if item.name != "Sulfuras, Hand of Ragnaros":
-                        item.quality = item.quality - 1
+                    item.quality = item.quality - 1
             else:
                 adjust_quality_if_less_than_50( item)
                 if item.name == "Backstage passes to a TAFKAL80ETC concert":
@@ -22,14 +29,14 @@ class GildedRose(object):
                         adjust_quality_if_less_than_50(item)
                     if item.sell_in < 6:
                         adjust_quality_if_less_than_50(item)
-            if item.name != "Sulfuras, Hand of Ragnaros":
-                item.sell_in = item.sell_in - 1
+
+            item.sell_in = item.sell_in - 1
+
             if item.sell_in < 0:
                 if item.name != "Aged Brie":
                     if item.name != "Backstage passes to a TAFKAL80ETC concert":
                         if item.quality > 0:
-                            if item.name != "Sulfuras, Hand of Ragnaros":
-                                item.quality = item.quality - 1
+                            item.quality = item.quality - 1
                     else:
                         item.quality = item.quality - item.quality
                 else:
