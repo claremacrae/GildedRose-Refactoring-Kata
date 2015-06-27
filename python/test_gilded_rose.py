@@ -58,6 +58,7 @@ class GildedRoseTest(unittest.TestCase):
     # TODO The Quality of an item is never more than 50
 
     # "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
+    # "Sulfuras" is a legendary item and as such its Quality is 80 and it never alters.
     def test_sulfuras_never_has_to_be_sold_and_never_increases_in_Value(self):
         self.check_one_item(
             Item(name="Sulfuras, Hand of Ragnaros", sell_in=0, quality=80),
@@ -98,9 +99,6 @@ class GildedRoseTest(unittest.TestCase):
         self.check_one_item(
             Item(name="Conjured Mana Cake", sell_in=3, quality=6),  # <-- :O
             ["Conjured Mana Cake", 2, 5])
-
-    # TODO Just for clarification, an item can never have its Quality increase above 50
-    # TODO however "Sulfuras" is a legendary item and as such its Quality is 80 and it never alters.
 
 
 if __name__ == '__main__':
