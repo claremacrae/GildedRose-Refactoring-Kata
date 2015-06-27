@@ -28,6 +28,14 @@ def handle_backstage_pass(item):
     if item.sell_in < 0:
         item.quality = 0
 
+def handle_normal_case(item):
+    decrement_quality_if_greater_than_zero(item)
+
+    item.sell_in = item.sell_in - 1
+
+    if item.sell_in < 0:
+        decrement_quality_if_greater_than_zero(item)
+
 class GildedRose(object):
 
     def __init__(self, items):
@@ -47,12 +55,7 @@ class GildedRose(object):
                 handle_backstage_pass(item)
                 continue
 
-            decrement_quality_if_greater_than_zero(item)
-
-            item.sell_in = item.sell_in - 1
-
-            if item.sell_in < 0:
-                decrement_quality_if_greater_than_zero(item)
+            handle_normal_case(item)
 
 class Item:
     def __init__(self, name, sell_in, quality):
