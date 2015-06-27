@@ -4,6 +4,10 @@ def increment_quality_if_less_than_50(item):
     if item.quality < 50:
         item.quality = item.quality + 1
 
+def decrement_quality_if_greater_than_zero(item):
+    if item.quality > 0:
+        item.quality = item.quality - 1
+
 def handle_sulfuras(item):
     # never changes
     pass
@@ -43,14 +47,12 @@ class GildedRose(object):
                 handle_backstage_pass(item)
                 continue
 
-            if item.quality > 0:
-                item.quality = item.quality - 1
+            decrement_quality_if_greater_than_zero(item)
 
             item.sell_in = item.sell_in - 1
 
             if item.sell_in < 0:
-                if item.quality > 0:
-                    item.quality = item.quality - 1
+                decrement_quality_if_greater_than_zero(item)
 
 class Item:
     def __init__(self, name, sell_in, quality):
