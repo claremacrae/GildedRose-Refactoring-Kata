@@ -8,6 +8,10 @@ def handle_sulfuras(item):
     # never changes
     pass
 
+def handle_aged_brie(item):
+    adjust_quality_if_less_than_50(item)
+    item.sell_in = item.sell_in - 1
+
 class GildedRose(object):
 
     def __init__(self, items):
@@ -19,7 +23,11 @@ class GildedRose(object):
                 handle_sulfuras(item)
                 continue
 
-            if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert":
+            if item.name == "Aged Brie":
+                handle_aged_brie(item)
+                continue
+
+            if item.name != "Backstage passes to a TAFKAL80ETC concert":
                 if item.quality > 0:
                     item.quality = item.quality - 1
             else:
@@ -33,16 +41,13 @@ class GildedRose(object):
             item.sell_in = item.sell_in - 1
 
             if item.sell_in < 0:
-                if item.name != "Aged Brie":
-                    if item.name != "Backstage passes to a TAFKAL80ETC concert":
-                        if item.quality > 0:
-                            item.quality = item.quality - 1
-                    else:
-                        item.quality = item.quality - item.quality
+                if item.name != "Backstage passes to a TAFKAL80ETC concert":
+                    if item.quality > 0:
+                        item.quality = item.quality - 1
                 else:
-                    adjust_quality_if_less_than_50( item)
+                    item.quality = item.quality - item.quality
 
-    
+
 class Item:
     def __init__(self, name, sell_in, quality):
         self.name = name
