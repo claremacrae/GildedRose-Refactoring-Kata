@@ -46,7 +46,7 @@ class GildedRose(object):
 
     def update_quality(self):
         for item in self.items:
-            if item.name == "Sulfuras, Hand of Ragnaros":
+            if item.name.startswith("Sulfuras, "):
                 handle_sulfuras(item)
             elif item.name == "Aged Brie":
                 handle_aged_brie(item)

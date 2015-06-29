@@ -78,8 +78,8 @@ class GildedRoseTest(unittest.TestCase):
             ["Sulfuras, Hand of Ragnaros", 0, 80])
 
         self.check_one_item(
-            Item(name="Sulfuras, Hand of Ragnaros", sell_in=-1, quality=80),
-            ["Sulfuras, Hand of Ragnaros", -1, 80])
+            Item(name="Sulfuras, Foot of Troy", sell_in=-1, quality=80),
+            ["Sulfuras, Foot of Troy", -1, 80])
 
     #===========================================================================================
     # "Backstage passes", like aged brie, increases in Quality as it's SellIn value approaches;
