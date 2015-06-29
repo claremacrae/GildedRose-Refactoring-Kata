@@ -127,8 +127,8 @@ class GildedRoseTest(unittest.TestCase):
     # The Quality of an item is never more than 50 - Backstage passes
     def test_backstage_pass_quality_does_not_increase_above_50_when_more_five_days_or_less(self):
         self.check_one_item(
-            Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=5, quality=49),
-            ["Backstage passes to a TAFKAL80ETC concert", 4, 50])
+            Item(name="Backstage passes to a Meatloaf concert", sell_in=5, quality=49),
+            ["Backstage passes to a Meatloaf concert", 4, 50])
 
         self.check_one_item(
             Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=5, quality=50),
