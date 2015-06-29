@@ -16,15 +16,17 @@ class GildedRoseTest(unittest.TestCase):
         self.assertEqual(2, len(expected_values))
 
         expected_name = item.name
+        original_item_text = str(item)
+
         items = []
         items.append(item)
         GildedRose(items).update_quality()
 
-        self.assertEqual(expected_name, item.name)
-        self.assertEqual(expected_values[0], item.sell_in)
-        self.assertEqual(expected_values[1], item.quality)
+        self.assertEqual(expected_name, item.name, original_item_text)
+        self.assertEqual(expected_values[0], item.sell_in, original_item_text)
+        self.assertEqual(expected_values[1], item.quality, original_item_text)
         # The Quality of an item is never negative
-        self.assertGreaterEqual(item.quality, 0)
+        self.assertGreaterEqual(item.quality, 0, original_item_text)
 
 
     #===========================================================================================
