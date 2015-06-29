@@ -8,6 +8,9 @@ def decrement_quality_if_greater_than_zero(item, increment):
     if item.quality > 0:
         item.quality = item.quality - increment
 
+    if item.quality < 0:
+        item.quality = 0
+
 def handle_sulfuras(item):
     # never changes
     pass

@@ -20,6 +20,8 @@ class GildedRoseTest(unittest.TestCase):
         self.assertEqual(expected_values[0], item.name)
         self.assertEqual(expected_values[1], item.sell_in)
         self.assertEqual(expected_values[2], item.quality)
+        # The Quality of an item is never negative
+        self.assertGreaterEqual(item.quality, 0)
 
 
     #===========================================================================================
@@ -150,6 +152,10 @@ class GildedRoseTest(unittest.TestCase):
         self.check_one_item(
             Item(name="Conjured Mana Cake", sell_in=0, quality=6),
             ["Conjured Mana Cake", -1, 2])
+
+        self.check_one_item(
+            Item(name="Conjured Mana Cake", sell_in=0, quality=1),
+            ["Conjured Mana Cake", -1, 0])
 
 if __name__ == '__main__':
     unittest.main()
