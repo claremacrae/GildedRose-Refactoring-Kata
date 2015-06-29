@@ -13,13 +13,16 @@ class GildedRoseTest(unittest.TestCase):
         self.assertEqual(-1, items[0].sell_in)
 
     def check_one_item(self, item, expected_values):
+        self.assertEqual(2, len(expected_values))
+
+        expected_name = item.name
         items = []
         items.append(item)
         GildedRose(items).update_quality()
 
-        self.assertEqual(expected_values[0], item.name)
-        self.assertEqual(expected_values[1], item.sell_in)
-        self.assertEqual(expected_values[2], item.quality)
+        self.assertEqual(expected_name, item.name)
+        self.assertEqual(expected_values[0], item.sell_in)
+        self.assertEqual(expected_values[1], item.quality)
         # The Quality of an item is never negative
         self.assertGreaterEqual(item.quality, 0)
 
@@ -29,45 +32,45 @@ class GildedRoseTest(unittest.TestCase):
     def test_quality_and_sell_in_lowers_each_day(self):
         self.check_one_item(
             Item(name="+5 Dexterity Vest", sell_in=10, quality=20),
-            ["+5 Dexterity Vest", 9, 19])
+            [9, 19])
 
         self.check_one_item(
             Item(name="Elixir of the Mongoose", sell_in=5, quality=7),
-            ["Elixir of the Mongoose", 4, 6])
+            [4, 6])
 
     # Once the sell by date has passed, Quality degrades twice as fast
     def test_quality_drops_twice_as_fast_after_sell_by(self):
         self.check_one_item(
             Item(name="Elixir of the Mongoose", sell_in=0, quality=7),
-            ["Elixir of the Mongoose", -1, 5])
+            [-1, 5])
 
     # The Quality of an item is never negative
     def test_quality_never_negative(self):
         self.check_one_item(
             Item(name="Elixir of the Mongoose", sell_in=5, quality=1),
-            ["Elixir of the Mongoose", 4, 0])
+            [4, 0])
 
         self.check_one_item(
             Item(name="Elixir of the Mongoose", sell_in=5, quality=0),
-            ["Elixir of the Mongoose", 4, 0])
+            [4, 0])
 
     #===========================================================================================
     # "Aged Brie" actually increases in Quality the older it gets
     def test_aged_brie_quality_increases_with_age(self):
         self.check_one_item(
             Item(name="Aged Brie", sell_in=2, quality=0),
-            ["Aged Brie", 1, 1])
+            [1, 1])
         pass
 
     # The Quality of an item is never more than 50 - Aged Brie
     def test_aged_brie_quality_does_not_increase_above_50(self):
         self.check_one_item(
             Item(name="Aged Brie", sell_in=30, quality=49),
-            ["Aged Brie", 29, 50])
+            [29, 50])
 
         self.check_one_item(
             Item(name="Aged Brie", sell_in=30, quality=50),
-            ["Aged Brie", 29, 50])
+            [29, 50])
 
     #===========================================================================================
     # "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
@@ -75,11 +78,11 @@ class GildedRoseTest(unittest.TestCase):
     def test_sulfuras_never_has_to_be_sold_and_never_increases_in_Value(self):
         self.check_one_item(
             Item(name="Sulfuras, Hand of Ragnaros", sell_in=0, quality=80),
-            ["Sulfuras, Hand of Ragnaros", 0, 80])
+            [0, 80])
 
         self.check_one_item(
             Item(name="Sulfuras, Foot of Troy", sell_in=-1, quality=80),
-            ["Sulfuras, Foot of Troy", -1, 80])
+            [-1, 80])
 
     #===========================================================================================
     # "Backstage passes", like aged brie, increases in Quality as it's SellIn value approaches;
@@ -88,74 +91,74 @@ class GildedRoseTest(unittest.TestCase):
     def test_backstage_passes_increase_by_one_when_more_than_ten_days(self):
         self.check_one_item(
             Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=20),
-            ["Backstage passes to a TAFKAL80ETC concert", 14, 21])
+            [14, 21])
 
     # The Quality of an item is never more than 50 - Backstage passes
     def test_backstage_pass_quality_does_not_increase_above_50_when_more_than_ten_days(self):
         self.check_one_item(
             Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=49),
-            ["Backstage passes to a TAFKAL80ETC concert", 14, 50])
+            [14, 50])
 
         self.check_one_item(
             Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=50),
-            ["Backstage passes to a TAFKAL80ETC concert", 14, 50])
+            [14, 50])
 
     #===========================================================================================
     # Quality increases by 2 when there are 10 days or less
     def test_backstage_passes_increase_by_two_when_ten_days_or_less(self):
         self.check_one_item(
             Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=10, quality=20),
-            ["Backstage passes to a TAFKAL80ETC concert", 9, 22])
+            [9, 22])
 
     # The Quality of an item is never more than 50 - Backstage passes
     def test_backstage_pass_quality_does_not_increase_above_50_when_ten_days_or_less(self):
         self.check_one_item(
             Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=10, quality=49),
-            ["Backstage passes to a TAFKAL80ETC concert", 9, 50])
+            [9, 50])
 
         self.check_one_item(
             Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=10, quality=50),
-            ["Backstage passes to a TAFKAL80ETC concert", 9, 50])
+            [9, 50])
 
     #===========================================================================================
     # and by 3 when there are 5 days or less
     def test_backstage_passes_increase_by_three_when_five_days_or_less(self):
         self.check_one_item(
             Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=5, quality=20),
-            ["Backstage passes to a TAFKAL80ETC concert", 4, 23])
+            [4, 23])
 
     # The Quality of an item is never more than 50 - Backstage passes
     def test_backstage_pass_quality_does_not_increase_above_50_when_more_five_days_or_less(self):
         self.check_one_item(
             Item(name="Backstage passes to a Meatloaf concert", sell_in=5, quality=49),
-            ["Backstage passes to a Meatloaf concert", 4, 50])
+            [4, 50])
 
         self.check_one_item(
             Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=5, quality=50),
-            ["Backstage passes to a TAFKAL80ETC concert", 4, 50])
+            [4, 50])
 
     #===========================================================================================
     # "Backstage pass" Quality drops to 0 after the concert
     def test_backstage_passes_increase_by_five_when_ten_days_or_less(self):
         self.check_one_item(
             Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=0, quality=49),
-            ["Backstage passes to a TAFKAL80ETC concert", -1, 0])
+            [-1, 0])
 
     #===========================================================================================
     # Conjured items degrade in Quality twice as fast as normal items
     def test_conjured_items_degrade_twice_as_fast(self):
         self.check_one_item(
             Item(name="Conjured Mana Cake", sell_in=3, quality=6),
-            ["Conjured Mana Cake", 2, 4])
+            [2, 4])
 
     def test_conjured_items_degrade_twice_as_fast_after_sell_by(self):
         self.check_one_item(
             Item(name="Conjured Moon Cake", sell_in=0, quality=6),
-            ["Conjured Moon Cake", -1, 2])
+            [-1, 2])
 
         self.check_one_item(
             Item(name="Conjured Apple Cake", sell_in=0, quality=1),
-            ["Conjured Apple Cake", -1, 0])
+            [-1, 0])
 
 if __name__ == '__main__':
     unittest.main()
