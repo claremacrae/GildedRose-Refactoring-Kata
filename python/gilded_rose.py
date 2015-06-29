@@ -2,11 +2,11 @@
 
 def increment_quality_if_less_than_50(item):
     if item.quality < 50:
-        item.quality = item.quality + 1
+        item.quality += 1
 
 def decrement_quality_if_greater_than_zero(item, increment):
     if item.quality > 0:
-        item.quality = item.quality - increment
+        item.quality -= increment
 
     if item.quality < 0:
         item.quality = 0
@@ -17,7 +17,7 @@ def handle_sulfuras(item):
 
 def handle_aged_brie(item):
     increment_quality_if_less_than_50(item)
-    item.sell_in = item.sell_in - 1
+    item.sell_in -= 1
 
 def handle_backstage_pass(item):
     increment_quality_if_less_than_50( item)
@@ -26,7 +26,7 @@ def handle_backstage_pass(item):
     if item.sell_in < 6:
         increment_quality_if_less_than_50(item)
 
-    item.sell_in = item.sell_in - 1
+    item.sell_in -= 1
 
     if item.sell_in < 0:
         item.quality = 0
@@ -34,7 +34,7 @@ def handle_backstage_pass(item):
 def handle_normal_case(item, increment):
     decrement_quality_if_greater_than_zero(item, increment)
 
-    item.sell_in = item.sell_in - 1
+    item.sell_in -= 1
 
     if item.sell_in < 0:
         decrement_quality_if_greater_than_zero(item, increment)
