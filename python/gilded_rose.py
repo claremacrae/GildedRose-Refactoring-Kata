@@ -4,6 +4,7 @@ def increment_quality_if_less_than_50(item):
     if item.quality < 50:
         item.quality += 1
 
+
 def decrement_quality_if_greater_than_zero(item, increment):
     if item.quality > 0:
         item.quality -= increment
@@ -11,16 +12,19 @@ def decrement_quality_if_greater_than_zero(item, increment):
     if item.quality < 0:
         item.quality = 0
 
+
 def handle_sulfuras(item):
     # never changes
     pass
+
 
 def handle_aged_brie(item):
     increment_quality_if_less_than_50(item)
     item.sell_in -= 1
 
+
 def handle_backstage_pass(item):
-    increment_quality_if_less_than_50( item)
+    increment_quality_if_less_than_50(item)
     if item.sell_in < 11:
         increment_quality_if_less_than_50(item)
     if item.sell_in < 6:
@@ -31,6 +35,7 @@ def handle_backstage_pass(item):
     if item.sell_in < 0:
         item.quality = 0
 
+
 def handle_normal_case(item, increment):
     decrement_quality_if_greater_than_zero(item, increment)
 
@@ -39,8 +44,8 @@ def handle_normal_case(item, increment):
     if item.sell_in < 0:
         decrement_quality_if_greater_than_zero(item, increment)
 
-class GildedRose(object):
 
+class GildedRose(object):
     def __init__(self, items):
         self.items = items
 
@@ -56,6 +61,7 @@ class GildedRose(object):
                 handle_normal_case(item, 2)
             else:
                 handle_normal_case(item, 1)
+
 
 class Item:
     def __init__(self, name, sell_in, quality):

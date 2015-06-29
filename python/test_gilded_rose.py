@@ -3,6 +3,7 @@ import unittest
 
 from gilded_rose import Item, GildedRose
 
+
 class GildedRoseTest(unittest.TestCase):
     def test_foo(self):
         items = [Item("foo", 0, 0)]
@@ -28,8 +29,7 @@ class GildedRoseTest(unittest.TestCase):
         # The Quality of an item is never negative
         self.assertGreaterEqual(item.quality, 0, original_item_text)
 
-
-    #===========================================================================================
+    # ===========================================================================================
     # At the end of each day our system lowers both values for every item
     def test_quality_and_sell_in_lowers_each_day(self):
         self.check_one_item(
@@ -56,7 +56,7 @@ class GildedRoseTest(unittest.TestCase):
             Item(name="Elixir of the Mongoose", sell_in=5, quality=0),
             [4, 0])
 
-    #===========================================================================================
+    # ===========================================================================================
     # "Aged Brie" actually increases in Quality the older it gets
     def test_aged_brie_quality_increases_with_age(self):
         self.check_one_item(
@@ -74,7 +74,7 @@ class GildedRoseTest(unittest.TestCase):
             Item(name="Aged Brie", sell_in=30, quality=50),
             [29, 50])
 
-    #===========================================================================================
+    # ===========================================================================================
     # "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
     # "Sulfuras" is a legendary item and as such its Quality is 80 and it never alters.
     def test_sulfuras_never_has_to_be_sold_and_never_increases_in_Value(self):
@@ -86,7 +86,7 @@ class GildedRoseTest(unittest.TestCase):
             Item(name="Sulfuras, Foot of Troy", sell_in=-1, quality=80),
             [-1, 80])
 
-    #===========================================================================================
+    # ===========================================================================================
     # "Backstage passes", like aged brie, increases in Quality as it's SellIn value approaches;
 
     # Quality increases by 1 when there are more than 10 days
@@ -105,7 +105,7 @@ class GildedRoseTest(unittest.TestCase):
             Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=50),
             [14, 50])
 
-    #===========================================================================================
+    # ===========================================================================================
     # Quality increases by 2 when there are 10 days or less
     def test_backstage_passes_increase_by_two_when_ten_days_or_less(self):
         self.check_one_item(
@@ -122,7 +122,7 @@ class GildedRoseTest(unittest.TestCase):
             Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=10, quality=50),
             [9, 50])
 
-    #===========================================================================================
+    # ===========================================================================================
     # and by 3 when there are 5 days or less
     def test_backstage_passes_increase_by_three_when_five_days_or_less(self):
         self.check_one_item(
@@ -139,14 +139,14 @@ class GildedRoseTest(unittest.TestCase):
             Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=5, quality=50),
             [4, 50])
 
-    #===========================================================================================
+    # ===========================================================================================
     # "Backstage pass" Quality drops to 0 after the concert
     def test_backstage_passes_increase_by_five_when_ten_days_or_less(self):
         self.check_one_item(
             Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=0, quality=49),
             [-1, 0])
 
-    #===========================================================================================
+    # ===========================================================================================
     # Conjured items degrade in Quality twice as fast as normal items
     def test_conjured_items_degrade_twice_as_fast(self):
         self.check_one_item(
@@ -162,6 +162,6 @@ class GildedRoseTest(unittest.TestCase):
             Item(name="Conjured Apple Cake", sell_in=0, quality=1),
             [-1, 0])
 
+
 if __name__ == '__main__':
     unittest.main()
-
