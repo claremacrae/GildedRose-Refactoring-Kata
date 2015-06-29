@@ -150,12 +150,12 @@ class GildedRoseTest(unittest.TestCase):
 
     def test_conjured_items_degrade_twice_as_fast_after_sell_by(self):
         self.check_one_item(
-            Item(name="Conjured Mana Cake", sell_in=0, quality=6),
-            ["Conjured Mana Cake", -1, 2])
+            Item(name="Conjured Moon Cake", sell_in=0, quality=6),
+            ["Conjured Moon Cake", -1, 2])
 
         self.check_one_item(
-            Item(name="Conjured Mana Cake", sell_in=0, quality=1),
-            ["Conjured Mana Cake", -1, 0])
+            Item(name="Conjured Apple Cake", sell_in=0, quality=1),
+            ["Conjured Apple Cake", -1, 0])
 
 if __name__ == '__main__':
     unittest.main()

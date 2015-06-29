@@ -52,7 +52,7 @@ class GildedRose(object):
                 handle_aged_brie(item)
             elif item.name == "Backstage passes to a TAFKAL80ETC concert":
                 handle_backstage_pass(item)
-            elif item.name == "Conjured Mana Cake":
+            elif item.name.startswith("Conjured "):
                 handle_normal_case(item, 2)
             else:
                 handle_normal_case(item, 1)
