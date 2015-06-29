@@ -140,12 +140,16 @@ class GildedRoseTest(unittest.TestCase):
             ["Backstage passes to a TAFKAL80ETC concert", -1, 0])
 
     #===========================================================================================
-    # Conjured items initially behave normally
-    def test_conjured_items_degrade_normally(self):
+    # Conjured items degrade in Quality twice as fast as normal items
+    def test_conjured_items_degrade_twice_as_fast(self):
         self.check_one_item(
-            Item(name="Conjured Mana Cake", sell_in=3, quality=6),  # <-- :O
-            ["Conjured Mana Cake", 2, 5])
+            Item(name="Conjured Mana Cake", sell_in=3, quality=6),
+            ["Conjured Mana Cake", 2, 4])
 
+    def test_conjured_items_degrade_twice_as_fast_after_sell_by(self):
+        self.check_one_item(
+            Item(name="Conjured Mana Cake", sell_in=0, quality=6),
+            ["Conjured Mana Cake", -1, 2])
 
 if __name__ == '__main__':
     unittest.main()
